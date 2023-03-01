@@ -1,0 +1,29 @@
+---
+- name: Install Apache, set timezone, and display HTML page
+  hosts: all
+  become: true
+  vars:
+    timezone: Africa/Lagos
+    html_content: "<html><body><h1>Hello, world!</h1></body></html>"
+    elb_dns_name: "{{ lookup('env', 'ELB_DNS_NAME') }}"
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      state: present
+  - name: Set timezone
+    timezone:
+      name: "{{ timezone }}"
+  - name: Display HTML page
+    copy:
+      content: "{{ html_content }}"
+      dest: /var/www/html/index.html
+  - name: Add A record for subdomain
+    route53:
+      command: create
+      zone: example.com
+      record: terraform-test.example.com
+      type: A
+      ttl: 300
+      values:
+        - "{{ elb_dns_name }}"
