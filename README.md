@@ -3,6 +3,7 @@ Creating 3 EC2 instances and behind an ELB plus an Ansible Script
 # EC2-ELB-with-Terraform
 Creating 3 EC2 (Elastic Compute Cloud) instances and behind an ELB plus an Ansible Script
 Below are the images to show output of what I created
+I put the task description as the first image, Counting starts from 0
 1. First image shows the EC2 (Elastic Cloud Computing) three (3) instances that has been spinned off
 2. The second image shows the security group created for the EC2 instance that will be a pivot for the ELB
 3. The third image shows the ELB (Elastic Load Balancers) being provisioned
